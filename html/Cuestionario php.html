@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Preguntas de Opción Múltiple</title>
+    <style>
+        body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+    }
+    
+    h1 {
+        text-align: center;
+        color: #007bff;
+        margin-top: 30px;
+    }
+    
+    #pregunta-container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    #pregunta {
+        font-size: 18px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    
+    #form-respuestas label {
+        display: block;
+        margin-bottom: 15px;
+        font-size: 16px;
+    }
+    
+    #form-respuestas input {
+        margin-right: 10px;
+    }
+    
+    button {
+        padding: 12px 20px;
+        margin-top: 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+    
+    button:hover {
+        background-color: #0056b3;
+    }
+    
+    #puntuacion {
+        text-align: center;
+        display: none;
+        margin-top: 20px;
+    }
+    
+    #respuestas-correctas {
+        display: none;
+        margin-top: 20px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    #lista-respuestas {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    #lista-respuestas li {
+        margin-bottom: 15px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+    }
+    
+    #lista-respuestas li:last-child {
+        border-bottom: none;
+    }
+    
+    #lista-respuestas li strong {
+        display: block;
+        font-size: 16px;
+        margin-bottom: 5px;
+        color: #007bff;
+    }
+    
+    #lista-respuestas li span {
+        font-size: 16px;
+        color: #4CAF50;
+        font-weight: bold;
+    }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Cuestionario de PHP</h1>
+
+    <div id="pregunta-container">
+        <p id="pregunta"></p>
+        <form id="form-respuestas">
+            <!-- Las opciones de respuesta se generarán dinámicamente con JavaScript -->
+        </form>
+        <button type="button" onclick="verificarRespuesta()">Siguiente</button>
+        <button type="button" onclick="anteriorPregunta()">Anterior</button>
+    </div>
+
+    <div id="puntuacion" style="display: none;">
+        <h2>Tu puntaje final es: <span id="puntaje-final"></span>/12</h2>
+        <button type="button" onclick="mostrarRespuestas()">Ver Respuestas</button>
+        <button type="button" onclick="ocultarRespuestas()">Ocultar Respuestas</button>
+        <div id="respuestas-correctas">
+            <h3>Respuestas Correctas:</h3>
+            <ul id="lista-respuestas"></ul>
+        </div>
+        <button type="button" onclick="reiniciarJuego()">Reiniciar Cuestionario</button>
+    </div>
+
+    <script>
+        // Preguntas y respuestas
+        var preguntas = [
+            { pregunta: "Pregunta 1: ¿Quién fue el creador original de PHP y en qué año se creó la primera versión pública?", opciones: ["A) Bill Gates en 1995", "B) Rasmus Lerdorf en 1994", "C) Linus Torvalds en 1996", "D) Tim Berners-Lee en 1997"], respuesta: "B) Rasmus Lerdorf en 1994" },
+            { pregunta: "Pregunta 2: ¿Para qué se utiliza principalmente PHP en el desarrollo web?", opciones: ["A) Desarrollo de videojuegos", "B) Desarrollo de aplicaciones móviles", "C) Desarrollo de aplicaciones web del lado del servidor", "D) Desarrollo de inteligencia artificial"], respuesta: "C) Desarrollo de aplicaciones web del lado del servidor" },
+            { pregunta: "Pregunta 3: ¿Cuál de las siguientes NO es una aplicación común de PHP según la información proporcionada?", opciones: ["A) Gestión de Sesiones y Cookies", "B) Desarrollo de videojuegos con Unity", "C) Interacción con Bases de Datos", "D) Desarrollo de Aplicaciones Empresariales"], respuesta: "B) Desarrollo de videojuegos con Unity" },
+            { pregunta: "Pregunta 4: ¿Cuál es uno de los CMS mencionados que está construido con PHP?", opciones: ["A) Drupal", "B) Django", "C) Flask", "D) Ruby on Rails"], respuesta: "A) Drupal" },
+            { pregunta: "Pregunta 5: ¿Qué tipo de aplicaciones se pueden desarrollar con PHP según la información proporcionada?", opciones: ["A) Aplicaciones de realidad virtual", "B) Aplicaciones de chat en tiempo real", "C) Aplicaciones de inteligencia artificial", "D) Aplicaciones de edición de video"], respuesta: "B) Aplicaciones de chat en tiempo real" },
+            { pregunta: "Pregunta 6: ¿Cómo se escribe 'Hola, Mundo' en un programa PHP?", opciones: ["A) console.log('Hola, Mundo');", "B) System.print('Hola, Mundo');", "C) echo 'Hola, Mundo';", "D) echo('Hola, Mundo');"], respuesta: "C) echo 'Hola, Mundo';" },
+            { pregunta: "Pregunta 7: ¿Cuál de los siguientes programas se utiliza comúnmente para desarrollar en PHP?", opciones: ["A) Eclipse", "B) Visual Studio Code", "C) NetBeans", "D) Visual Studio Community"], respuesta: "B) Visual Studio Code" },
+            { pregunta: "Pregunta 8: ¿Qué carpeta se utiliza para guardar tus códigos en XAMPP?", opciones: ["A) /htdocs", "B) /public_html", "C) /src", "D) /web"], respuesta: "A) /htdocs" },
+            { pregunta: "Pregunta 9: ¿Cuál es el propósito principal de XAMPP en el desarrollo PHP?", opciones: ["A) Crear gráficos 3D", "B) Facilitar el desarrollo de aplicaciones móviles", "C) Proporcionar un entorno de desarrollo local", "D) Compilar código C#"], respuesta: "C) Proporcionar un entorno de desarrollo local" },
+            { pregunta: "Pregunta 10: ¿Cuál es el otro programa utilizado para programar en php y ver en tu entorno local?", opciones: ["A) Eclipse", "B) Visual Studio Code", "C) NetBeans", "D) Xampp"], respuesta: "D) Xampp" },
+            { pregunta: "Pregunta 11: ¿Cómo concatenas dos variables en PHP?", opciones: ["A) $variable1 + $variable2", "B) $variable1 . $variable2", "C) $variable1 & $variable2", "D) concatenate($variable1, $variable2)"], respuesta: "B) $variable1 . $variable2" },
+            { pregunta: "Pregunta 12: ¿Con que signo declaras una variable en php?", opciones: ["A) $", "B) - ", "C) + ", "D) No hay signo para declarar"], respuesta: "A) $" },
+        ];
+
+
+        // Variables
+        var preguntaActual = 0;
+        var puntaje = 0;
+        var respuestasUsuario = [];
+
+        // Función para mostrar la pregunta actual
+        function mostrarPregunta() {
+            var preguntaElemento = document.getElementById('pregunta');
+            var opcionesElemento = document.getElementById('form-respuestas');
+
+            preguntaElemento.textContent = preguntas[preguntaActual].pregunta;
+
+            // Limpiar opciones anteriores
+            opcionesElemento.innerHTML = "";
+
+            // Agregar opciones de respuesta
+            preguntas[preguntaActual].opciones.forEach(function (opcion, index) {
+                var input = document.createElement('input');
+                input.type = 'radio';
+                input.name = 'opcion';
+                input.value = opcion;
+                input.id = 'opcion' + index;
+
+                // Si la opción está guardada por el usuario, seleccionarla
+                if (respuestasUsuario[preguntaActual] === opcion) {
+                    input.checked = true;
+                }
+
+                var label = document.createElement('label');
+                label.textContent = opcion;
+                label.setAttribute('for', 'opcion' + index);
+
+                opcionesElemento.appendChild(input);
+                opcionesElemento.appendChild(label);
+                opcionesElemento.appendChild(document.createElement('br'));
+            });
+        }
+
+        function verificarRespuesta() {
+            var opciones = document.getElementsByName('opcion');
+            var respuestaUsuario;
+
+            opciones.forEach(function (opcion) {
+                if (opcion.checked) {
+                    respuestaUsuario = opcion.value;
+                }
+            });
+
+            // Guardar la respuesta seleccionada por el usuario
+            respuestasUsuario[preguntaActual] = respuestaUsuario;
+
+            if (respuestaUsuario === preguntas[preguntaActual].respuesta) {
+                puntaje++;
+            }
+
+            // Verificar si hay más preguntas antes de incrementar preguntaActual
+            if (preguntaActual < preguntas.length - 1) {
+                // Pasar a la siguiente pregunta
+                preguntaActual++;
+                mostrarPregunta();
+            } else {
+                // Mostrar puntaje final
+                mostrarPuntuacion();
+            }
+        }
+
+
+        // Función para mostrar respuestas correctas
+        function mostrarRespuestas() {
+            var respuestasCorrectas = document.getElementById('lista-respuestas');
+            respuestasCorrectas.innerHTML = "";
+
+            preguntas.forEach(function (pregunta) {
+                var listItem = document.createElement('li');
+                listItem.innerHTML = `<strong>${pregunta.pregunta}:</strong> ${pregunta.respuesta}`;
+                respuestasCorrectas.appendChild(listItem);
+            });
+
+            document.getElementById('respuestas-correctas').style.display = 'block';
+        }
+
+        // Función para ocultar respuestas correctas
+        function ocultarRespuestas() {
+            document.getElementById('respuestas-correctas').style.display = 'none';
+        }
+
+        // Función para mostrar la puntuación final
+        function mostrarPuntuacion() {
+            var puntuacionElemento = document.getElementById('puntuacion');
+            var puntajeFinalElemento = document.getElementById('puntaje-final');
+
+            puntuacionElemento.style.display = 'block';
+            puntajeFinalElemento.textContent = puntaje;
+        }
+
+        // Función para ir a la pregunta anterior
+        function anteriorPregunta() {
+            // Regresar a la pregunta anterior si no estamos en la primera pregunta
+            if (preguntaActual > 0) {
+                preguntaActual--;
+                mostrarPregunta();
+            }
+        }
+
+        // Función para reiniciar el juego
+        function reiniciarJuego() {
+            preguntaActual = 0;
+            puntaje = 0;
+            respuestasUsuario = [];
+            document.getElementById('puntuacion').style.display = 'none';
+            document.getElementById('respuestas-correctas').style.display = 'none';
+            mostrarPregunta();
+        }
+
+        // Inicializar el juego
+        mostrarPregunta();
+    </script>
+
+</body>
+
+</html>

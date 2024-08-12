@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CODEACADEMY</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:300,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <style>
+      body {
+        background-color: rgb(7, 7, 112);
+        font-family: "Poppins", sans-serif;
+      }
+
+      .nosotros-section {
+        padding: 50px 20px;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .card {
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        width: 90%;
+        max-width: 800px;
+        text-align: center;
+        color: white;
+        text-align: justify;
+      }
+
+      .card h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-top: 20px;
+        text-transform: uppercase;
+        text-align: center;
+      }
+
+      .card img {
+        max-width: 100%;
+        height: auto;
+        margin: 20px auto;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+
+      .card p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin: 20px;
+      }
+
+      .card .card-content {
+        padding: 20px;
+      }
+
+      @media (max-width: 991px) {
+        .sidebar {
+          background-color: rgba(255, 255, 255, 0.15);
+          backdrop-filter: blur(10px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+      <div class="container">
+        <a class="navbar-brand fs-4" href="../#">CODEACADEMY</a>
+        <button
+          class="navbar-toggler shadow-none border-0"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar"
+          aria-controls="offcanvasNavbar"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="sidebar offcanvas offcanvas-start"
+          tabindex="-1"
+          id="offcanvasNavbar"
+          aria-labelledby="offcanvasNavbarLabel"
+        >
+          <div class="offcanvas-header text-white border-bottom">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+              CODEACADEMY
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white shadow-none"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body d-flex flex-column flex-lg-row p-4 p-lg-0">
+            <ul
+              class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3"
+            >
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="../index.html">Inicio</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="cursos.hmtl.html">Cursos</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="recursos.html">Recursos</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="articulos.html">Articulos</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="cuestionarios.html">Cuestionarios</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link active" href="about.html">Nosotros</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="contacto.html">Contactanos</a>
+              </li>
+            </ul>
+            <div
+              class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3"
+            >
+              <img src="../media/img/log.png" width="79px" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container nosotros-section">
+      <div class="card">
+        <h1>Sobre Nosotros</h1>
+        <img src="../media/logo.jpg" alt="Imagen de la empresa" />
+        <div class="card-content">
+          <p>
+            Bienvenido a CodeAcademy, tu destino para aprender programación en
+            línea. En CodeAcademy, te ofrecemos cursos en línea que te permiten
+            aprender programación de manera efectiva, desde principiantes hasta
+            expertos. Además de nuestros cursos, encontrarás recursos, noticias
+            y cuestionarios para poner a prueba tus conocimientos. Embárcate en
+            tu viaje hacia la maestría en programación con CodeAcademy hoy
+            mismo.
+          </p>
+          <p>
+            Nuestra plataforma se dedica a proporcionar una educación de calidad
+            en el ámbito de la programación y el desarrollo de software. Con un
+            enfoque en la accesibilidad y la eficacia, nuestros cursos están
+            diseñados para ser comprensibles y aplicables, ayudándote a adquirir
+            habilidades prácticas que puedes utilizar en el mundo real.
+          </p>
+          <p>
+            En CodeAcademy, creemos en el poder del conocimiento compartido. Es
+            por eso que, además de nuestros cursos, ofrecemos una variedad de
+            artículos informativos y recursos gratuitos que pueden ayudarte a
+            expandir tus conocimientos y mantenerte actualizado con las últimas
+            tendencias en la industria de la tecnología.
+          </p>
+          <p>
+            Ya sea que estés empezando tu viaje en la programación o busques
+            perfeccionar tus habilidades avanzadas, CodeAcademy está aquí para
+            apoyarte en cada paso del camino. Únete a nuestra comunidad de
+            estudiantes apasionados y comienza a construir tu futuro hoy.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <footer class="custom-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h4>Enlace</h4>
+            <ul>
+              <li><a href="../index.html">Inicio</a></li>
+              <li><a href="cursos.hmtl.html">Cursos</a></li>
+              <li><a href="cuestionarios.html">Cuestionarios </a></li>
+              <li><a href="recursos.html">Recursos</a></li>
+              <li><a href="articulos.html">Articulos</a></li>
+              <li><a href="about.html">Sobre nosotros</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <hr />
+            <h4>Contacto</h4>
+            <p>Codeacademy@gmail.com</p>
+            <p>Codeacademy2023@gmail.com</p>
+          </div>
+          <div class="col-md-4">
+            <hr />
+            <h4>Redes Sociales</h4>
+            <ul>
+              <li>
+                <a href="../#"><i class="bi bi-facebook"></i> Facebook</a>
+              </li>
+              <li>
+                <a href="../#"><i class="fab fa-twitter"></i> Twitter</a>
+              </li>
+              <li>
+                <a href="../#"><i class="fab fa-linkedin"></i> YouTube</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cursos</title>
+    <link
+      href="../https://fonts.googleapis.com/css?family=Poppins:300,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <style>
+      body {
+        background-color: rgb(7, 7, 112);
+      }
+
+      @media (max-width: 991px) {
+        .sidebar {
+          background-color: rgba(255, 255, 255, 0.15);
+          backdrop-filter: blur(10px);
+        }
+      }
+
+      .noticia-container {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .imagen-noticia {
+        max-width: 80%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+      <div class="container">
+        <a class="navbar-brand fs-4" href="../#"> CODEACADEMY</a>
+        <button
+          class="navbar-toggler shadow-none border-0"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar"
+          aria-controls="offcanvasNavbar"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="sidebar offcanvas offcanvas-start"
+          tabindex="-1"
+          id="offcanvasNavbar"
+          aria-labelledby="offcanvasNavbarLabel"
+        >
+          <!---->
+          <div class="offcanvas-header text-white border-bottom">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+              CODEACADEMY
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white shadow-none"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <!---->
+          <div class="offcanvas-body d-flex flex-column flex-lg-row p-4 p-lg-0">
+            <ul
+              class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3"
+            >
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="../index.html">Inicio</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="cursos.hmtl.html">Cursos</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="recursos.html">Recursos</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link active" href="articulos.html">Articulos</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="cuestionarios.html">Cuestionarios</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="about.html">Nosotros</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="contacto.html">Contactanos</a>
+              </li>
+            </ul>
+            <div
+              class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3"
+            >
+              <img src="../media/img/log.png" width="79px" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container" style="background-color: #fff">
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <div class="noticia-container">
+            <img
+              src="../media/img/Noticia sobre python en Microsoft.jpg"
+              style="margin-top: 10%"
+              alt="Descripción de la imagen"
+              class="imagen-noticia"
+            />
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="noticia-container">
+            <h2>Python en Excell</h2>
+            <p style="text-align: justify; margin-right: 10%; margin-left: 10%">
+              Python se integra en Excel y ya lo puedes probar.<br />
+              Python se ha consagrado como uno de los lenguajes de programación
+              más populares y versátiles de la actualidad. Ahora, los usuarios
+              podrán utilizar sus bases para crear y experimentar en Excel como
+              nunca antes.<br />
+              Los usuarios ya pueden disfrutar de una preview pública de Python
+              en Excel desde ya, permitiendo manipular y analizar datos a través
+              de las funciones integradas de este lenguaje de programación.
+              <br />
+              "Puedes manipular y explorar datos en Excel utilizando gráficos y
+              bibliotecas de Python y, a continuación, utilizar las fórmulas,
+              gráficos y tablas dinámicas de Excel para afinar aún más tus
+              conocimientos,” explicaba Stefan Kinnestrand, manager general de
+              trabajo moderno en Microsoft. “Ahora puedes realizar análisis
+              avanzados de datos en el entorno familiar de Excel accediendo a
+              Python directamente desde la cinta de opciones de Excel,"
+              continuaba.<br />
+              Lo mejor de todo es que no tendrás que instalar ningún tipo de
+              software adicional ni plugin para acceder a esta funcionalidad, ya
+              que Python se incorporará a Excel por medio de los conectores
+              Power Query integrados de Excel.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <footer class="custom-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h4>Enlace</h4>
+            <ul>
+              <li><a href="../index.html">Inicio</a></li>
+              <li><a href="cursos.hmtl.html">Cursos</a></li>
+              <li><a href="cuestionarios.html">Cuestionarios </a></li>
+              <li><a href="recursos.html">Recursos</a></li>
+              <li><a href="articulos.html">Articulos</a></li>
+              <li><a href="about.html">Sobre nosotros</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <hr />
+            <h4>Contacto</h4>
+   <a href="mailto:Codeacademy20233@gmail.com">
+<p>Codeacademy20233@gmail.com</p>        </a>
+             <hr>
+          </div>
+          <div class="col-md-4">
+            <hr />
+            <h4>Redes Sociales</h4>
+            <ul>
+              <style>
+                #icono{
+                  width: 23px;
+                  margin-right: 5.5px;
+                }
+              </style>
+              <li>
+                <a href="https://www.facebook.com/profile.php?id=61553975529827"><i  class="bi bi-facebook"></i> <img  src="../media/img/fa.png" alt="" id="icono">Facebook</a>
+              </li>
+              <hr>
+               <li>
+                <a href="https://twitter.com/Codeacademy2023"><i  class="bi bi-facebook"></i> <img  src="../media/img/tw.webp" alt="" id="icono">X (twitter)</a>
+              </li>
+             
+            </ul>
+
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="../https://fonts.googleapis.com/css?family=Poppins:300,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/all.css">
+
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-xxxxxx" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+
+    <style>
+      body {
+        background-color: rgb(7, 7, 112);
+      }
+      @media (max-width: 991px) {
+        .sidebar {
+          background-color: rgba(255, 255, 255, 0.15);
+          backdrop-filter: blur(10px);
+        }
+      }
+
+      .col-md-4 > img {
+        width: 80%;
+        object-fit: contain;
+        height: 150px;
+        padding-top: 9%;
+        padding-left: 20%;
+      }
+      .card-img-top {
+        width: 100%;
+        height: 47%;
+        padding-top: 7px;
+        object-fit: contain;
+      }
+
+      #tuto > img {
+        width: 100%;
+        height: 40%;
+        margin-top: 15px;
+      }
+      .card {
+        transition: transform 1.3s;
+      }
+      .card:hover:not(#aviso) {
+        background-color: rgb(192, 192, 192);
+        transform: translate(0ch, -5mm);
+        cursor: pointer;
+      }
+
+      .card > img {
+        width: 80%;
+        object-fit: contain;
+        height: 150px;
+        padding-left: 7px;
+        padding-right: 7px;
+      }
+    </style>
+
+<title>CODEACADEMY</title>  </head>
+  <body>
+     <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+      <div class="container">
+        <a class="navbar-brand fs-4" href="../#"> CODEACADEMY</a>
+        <button
+          class="navbar-toggler shadow-none border-0"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar"
+          aria-controls="offcanvasNavbar"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="sidebar offcanvas offcanvas-start"
+          tabindex="-1"
+          id="offcanvasNavbar"
+          aria-labelledby="offcanvasNavbarLabel"
+        >
+          <!---->
+          <div class="offcanvas-header text-white border-bottom">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+              
+              CODEACADEMY
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white shadow-none"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <!---->
+          <div class="offcanvas-body d-flex flex-column flex-lg-row p-4 p-lg-0">
+            <ul
+              class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3"
+            >
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="../index.html">Inicio</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link active" href="cursos.hmtl.html">Cursos</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="recursos.html">Recursos</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="articulos.html">Articulos</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="cuestionarios.html">Cuestionarios</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="about.html">Nosotros</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="contacto.html">Contactanos</a>
+              </li>
+            </ul>
+            <div
+              class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3"
+            >
+              <img src="../media/img/log.png" width="79px" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    </nav>
+    <div class="container mt-5">
+      <div class="row" style="background-color: white">
+        <div class="col-md-6">
+          <video controls class="w-100">
+            <source src="../media/video/Variables C.mp4" type="video/mp4" />
+            Tu navegador no soporta el tag de video.
+          </video>
+        </div>
+
+        <div class="col-md-6">
+          <h2>Variables en C#</h2>
+          <p>
+          En esta clase aprenderás lo que es php
+          </p>
+        </div>
+      </div>
+      <hr />
+      <div class="row row-cols-1 row-cols-md-4 g-4">
+        
+         
+        <div class="col">
+          <div
+            class="card view overlay zoom"
+            style="
+              align-items: center;
+              align-content: center;
+              text-align: justify;
+            "
+          >
+            <img
+              src="../media/Diseño 4 C.jpg"
+              class="card-img-top"
+              alt="img/csharp.png"
+            />
+            <div class="card-body view overlay zoom">
+              <h5 class="card-title">Clase #4</h5>
+              <p class="card-text">
+                En esta clase darás los primeros pasos por php
+              </p>
+            </div>
+           <a href="reproductor js4.html"> <button
+              type="button"
+              class="btn btn-primary"
+              style="margin-bottom: 10px"
+            >
+              Información
+            </button></a>
+          </div>
+        </div>
+         
+      </div>
+    </div>
+    <footer class="custom-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h4>Enlace</h4>
+            <ul>
+              <li><a href="../index.html">Inicio</a></li>
+              <li><a href="cursos.hmtl.html">Cursos</a></li>
+              <li><a href="cuestionarios.html">Cuestionarios </a></li>
+              <li><a href="recursos.html">Recursos</a></li>
+              <li><a href="articulos.html">Articulos</a></li>
+              <li><a href="about.html">Sobre nosotros</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <hr />
+            <h4>Contacto</h4>
+   <a href="mailto:Codeacademy20233@gmail.com">
+<p>Codeacademy20233@gmail.com</p>        </a>
+             <hr>
+          </div>
+          <div class="col-md-4">
+            <hr />
+            <h4>Redes Sociales</h4>
+            <ul>
+              <style>
+                #icono{
+                  width: 23px;
+                  margin-right: 5.5px;
+                }
+              </style>
+              <li>
+                <a href="https://www.facebook.com/profile.php?id=61553975529827"><i  class="bi bi-facebook"></i> <img  src="../media/img/fa.png" alt="" id="icono">Facebook</a>
+              </li>
+              <hr>
+               <li>
+                <a href="https://twitter.com/Codeacademy2023"><i  class="bi bi-facebook"></i> <img  src="../media/img/tw.webp" alt="" id="icono">X (twitter)</a>
+              </li>
+             
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="../js/jquery-3.7.1.min.js"></script>
+  </body>
+</html>

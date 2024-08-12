@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Preguntas de Opción Múltiple</title>
+    <style>
+        body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+    }
+    
+    h1 {
+        text-align: center;
+        color: #007bff;
+        margin-top: 30px;
+    }
+    
+    #pregunta-container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    #pregunta {
+        font-size: 18px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    
+    #form-respuestas label {
+        display: block;
+        margin-bottom: 15px;
+        font-size: 16px;
+    }
+    
+    #form-respuestas input {
+        margin-right: 10px;
+    }
+    
+    button {
+        padding: 12px 20px;
+        margin-top: 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+    
+    button:hover {
+        background-color: #0056b3;
+    }
+    
+    #puntuacion {
+        text-align: center;
+        display: none;
+        margin-top: 20px;
+    }
+    
+    #respuestas-correctas {
+        display: none;
+        margin-top: 20px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    #lista-respuestas {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    #lista-respuestas li {
+        margin-bottom: 15px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+    }
+    
+    #lista-respuestas li:last-child {
+        border-bottom: none;
+    }
+    
+    #lista-respuestas li strong {
+        display: block;
+        font-size: 16px;
+        margin-bottom: 5px;
+        color: #007bff;
+    }
+    
+    #lista-respuestas li span {
+        font-size: 16px;
+        color: #4CAF50;
+        font-weight: bold;
+    }
+    </style>
+</head>
+
+<body>
+
+    <h1>Cuestionario de JavaScript</h1>
+
+    <div id="pregunta-container">
+        <p id="pregunta"></p>
+        <form id="form-respuestas">
+            <!-- Las opciones de respuesta se generarán dinámicamente con JavaScript -->
+        </form>
+        <button type="button" onclick="verificarRespuesta()">Siguiente</button>
+        <button type="button" onclick="anteriorPregunta()">Anterior</button>
+    </div>
+
+    <div id="puntuacion" style="display: none;">
+        <h2>Tu puntaje final es: <span id="puntaje-final"></span>/12</h2>
+        <button type="button" onclick="mostrarRespuestas()">Ver Respuestas</button>
+        <button type="button" onclick="ocultarRespuestas()">Ocultar Respuestas</button>
+        <div id="respuestas-correctas">
+            <h3>Respuestas Correctas:</h3>
+            <ul id="lista-respuestas"></ul>
+        </div>
+        <button type="button" onclick="reiniciarJuego()">Reiniciar Cuestionario</button>
+    </div>
+
+    <script>
+        // Preguntas y respuestas
+        var preguntas = [
+            { pregunta: "Pregunta 1: ¿Quién fue el creador original de JavaScript y en qué año se introdujo por primera vez en Netscape?", opciones: ["A) Bill Gates en 1995", "B) Brendan Eich en 1995", "C) Tim Berners-Lee en 1991", "D) Larry Page en 1998"], respuesta: "B) Brendan Eich en 1995" },
+            { pregunta: "Pregunta 2: ¿Qué es JavaScript en el contexto de la programación web?", opciones: ["A) Un sistema operativo", "B) Un lenguaje de programación del lado del servidor", "C) Un lenguaje de programación del lado del cliente", "D) Del lado del cliente y el servidor"], respuesta: "D) Del lado del cliente y el servidor" },
+             { pregunta: "Pregunta 4: ¿Qué programa se utiliza comúnmente para programar en JavaScript y depurar código?", opciones: ["A) Visual Studio Code", "B) Eclipse", "C) NetBeans", "D) Sublime Text"], respuesta: "A) Visual Studio Code" },
+            { pregunta: "Pregunta 5: ¿Cómo NO se declara una variable en JavaScript?", opciones: ["A) string variableName = 10;", "B) let variableName = 10;", "C) var variableName = 10;", "D) const variableName = 10;"], respuesta: "A) string variableName = 10;" },
+            { pregunta: "Pregunta 6: ¿Cuál es la forma correcta de escribir 'Hola, Mundo' en un programa JavaScript?", opciones: ["A) console.log('Hola, Mundo');", "B) System.out.print('Hola, Mundo');", "C) echo 'Hola, Mundo';", "D) print('Hola, Mundo');"], respuesta: "A) console.log('Hola, Mundo');" },
+            { pregunta: "Pregunta 7: ¿Cuándo se lanzó la especificación ECMAScript 6 (también conocida como ES6) que introdujo nuevas características y mejoras en JavaScript?", opciones: ["A) 2005", "B) 2010", "C) 2015", "D) 2020"], respuesta: "C) 2015" },
+            { pregunta: "Pregunta 8: ¿En qué parte de una página HTML se coloca comúnmente el código JavaScript para su ejecución?", opciones: ["A) En el encabezado (head)", "B) Antes del cierre del cuerpo (body)", "C) Después del cierre del cuerpo (body)", "D) En cualquier parte fuera o dentro del body"], respuesta: "D) En cualquier parte fuera o dentro del body" },
+            { pregunta: "Pregunta 9: ¿Cuál de los siguientes NO es un tipo de dato primitivo en JavaScript?", opciones: ["A) string", "B) boolean", "C) object", "D) number"], respuesta: "C) object" },
+            { pregunta: "Pregunta 10: ¿Cuales son los tipos de variables en JavaScript?", opciones: ["A) let, var, const", "B) string, int, bool", "C) $thisnombre", "D) Todas las anteriores"], respuesta: "A) let, var, const" },
+            { pregunta: "Pregunta 11: ¿Cuál es la forma correcta de comentar una línea en JavaScript?", opciones: ["A) // Este es un comentario", "B) /* Este es un comentario */", "C) # Este es un comentario", "D) -- Este es un comentario"], respuesta: "A) // Este es un comentario" },
+            { pregunta: "Pregunta 12: ¿Cómo se concatenan dos cadenas de texto en JavaScript?", opciones: ["A) text1 . text2", "B) text1 + text2", "C) text1 : text2", "D) concat(text1, text2)"], respuesta: "B) text1 + text2" },
+        ];
+
+
+        // Variables
+        var preguntaActual = 0;
+        var puntaje = 0;
+        var respuestasUsuario = [];
+
+        // Función para mostrar la pregunta actual
+        function mostrarPregunta() {
+            var preguntaElemento = document.getElementById('pregunta');
+            var opcionesElemento = document.getElementById('form-respuestas');
+
+            preguntaElemento.textContent = preguntas[preguntaActual].pregunta;
+
+            // Limpiar opciones anteriores
+            opcionesElemento.innerHTML = "";
+
+            // Agregar opciones de respuesta
+            preguntas[preguntaActual].opciones.forEach(function (opcion, index) {
+                var input = document.createElement('input');
+                input.type = 'radio';
+                input.name = 'opcion';
+                input.value = opcion;
+                input.id = 'opcion' + index;
+
+                // Si la opción está guardada por el usuario, seleccionarla
+                if (respuestasUsuario[preguntaActual] === opcion) {
+                    input.checked = true;
+                }
+
+                var label = document.createElement('label');
+                label.textContent = opcion;
+                label.setAttribute('for', 'opcion' + index);
+
+                opcionesElemento.appendChild(input);
+                opcionesElemento.appendChild(label);
+                opcionesElemento.appendChild(document.createElement('br'));
+            });
+        }
+
+        function verificarRespuesta() {
+            var opciones = document.getElementsByName('opcion');
+            var respuestaUsuario;
+
+            opciones.forEach(function (opcion) {
+                if (opcion.checked) {
+                    respuestaUsuario = opcion.value;
+                }
+            });
+
+            // Guardar la respuesta seleccionada por el usuario
+            respuestasUsuario[preguntaActual] = respuestaUsuario;
+
+            if (respuestaUsuario === preguntas[preguntaActual].respuesta) {
+                puntaje++;
+            }
+
+            // Verificar si hay más preguntas antes de incrementar preguntaActual
+            if (preguntaActual < preguntas.length - 1) {
+                // Pasar a la siguiente pregunta
+                preguntaActual++;
+                mostrarPregunta();
+            } else {
+                // Mostrar puntaje final
+                mostrarPuntuacion();
+            }
+        }
+
+
+        // Función para mostrar respuestas correctas
+        function mostrarRespuestas() {
+            var respuestasCorrectas = document.getElementById('lista-respuestas');
+            respuestasCorrectas.innerHTML = "";
+
+            preguntas.forEach(function (pregunta) {
+                var listItem = document.createElement('li');
+                listItem.innerHTML = `<strong>${pregunta.pregunta}:</strong> ${pregunta.respuesta}`;
+                respuestasCorrectas.appendChild(listItem);
+            });
+
+            document.getElementById('respuestas-correctas').style.display = 'block';
+        }
+
+        // Función para ocultar respuestas correctas
+        function ocultarRespuestas() {
+            document.getElementById('respuestas-correctas').style.display = 'none';
+        }
+
+        // Función para mostrar la puntuación final
+        function mostrarPuntuacion() {
+            var puntuacionElemento = document.getElementById('puntuacion');
+            var puntajeFinalElemento = document.getElementById('puntaje-final');
+
+            puntuacionElemento.style.display = 'block';
+            puntajeFinalElemento.textContent = puntaje;
+        }
+
+        // Función para ir a la pregunta anterior
+        function anteriorPregunta() {
+            // Regresar a la pregunta anterior si no estamos en la primera pregunta
+            if (preguntaActual > 0) {
+                preguntaActual--;
+                mostrarPregunta();
+            }
+        }
+
+        // Función para reiniciar el juego
+        function reiniciarJuego() {
+            preguntaActual = 0;
+            puntaje = 0;
+            respuestasUsuario = [];
+            document.getElementById('puntuacion').style.display = 'none';
+            document.getElementById('respuestas-correctas').style.display = 'none';
+            mostrarPregunta();
+        }
+
+        // Inicializar el juego
+        mostrarPregunta();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Preguntas de Opción Múltiple</title>
+    <style>
+       body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+    }
+    
+    h1 {
+        text-align: center;
+        color: #007bff;
+        margin-top: 30px;
+    }
+    
+    #pregunta-container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    #pregunta {
+        font-size: 18px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    
+    #form-respuestas label {
+        display: block;
+        margin-bottom: 15px;
+        font-size: 16px;
+    }
+    
+    #form-respuestas input {
+        margin-right: 10px;
+    }
+    
+    button {
+        padding: 12px 20px;
+        margin-top: 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+    
+    button:hover {
+        background-color: #0056b3;
+    }
+    
+    #puntuacion {
+        text-align: center;
+        display: none;
+        margin-top: 20px;
+    }
+    
+    #respuestas-correctas {
+        display: none;
+        margin-top: 20px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    #lista-respuestas {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    #lista-respuestas li {
+        margin-bottom: 15px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+    }
+    
+    #lista-respuestas li:last-child {
+        border-bottom: none;
+    }
+    
+    #lista-respuestas li strong {
+        display: block;
+        font-size: 16px;
+        margin-bottom: 5px;
+        color: #007bff;
+    }
+    
+    #lista-respuestas li span {
+        font-size: 16px;
+        color: #4CAF50;
+        font-weight: bold;
+    }
+    </style>
+</head>
+
+<body>
+
+    <h1>Cuestionario de C#</h1>
+
+    <div id="pregunta-container">
+        <p id="pregunta"></p>
+        <form id="form-respuestas">
+            <!-- Las opciones de respuesta se generarán dinámicamente con JavaScript -->
+        </form>
+        <button type="button" onclick="verificarRespuesta()">Siguiente</button>
+        <button type="button" onclick="anteriorPregunta()">Anterior</button>
+    </div>
+
+    <div id="puntuacion" style="display: none;">
+        <h2>Tu puntaje final es: <span id="puntaje-final"></span>/12</h2>
+        <button type="button" onclick="mostrarRespuestas()">Ver Respuestas</button>
+        <button type="button" onclick="ocultarRespuestas()">Ocultar Respuestas</button>
+        <div id="respuestas-correctas">
+            <h3>Respuestas Correctas:</h3>
+            <ul id="lista-respuestas"></ul>
+        </div>
+        <button type="button" onclick="reiniciarJuego()">Reiniciar Cuestionario</button>
+    </div>
+
+    <script>
+        // Preguntas y respuestas
+        var preguntas = [
+            { pregunta: "Pregunta 1: ¿Quién lideró el equipo de ingenieros en Microsoft que creó C#?", opciones: ["A) Bill Gates", "B) Anders Hejlsberg", "C) Linus Torvalds", "D) Tim Berners-Lee"], respuesta: "B) Anders Hejlsberg" },
+            { pregunta: "Pregunta 2: ¿En qué década comenzó el desarrollo de C# con el objetivo de aprovechar la plataforma .NET de Microsoft?", opciones: ["A) Década de 1980", "B) Década de 1990", "C) Década de 2000", "D) Década de 2010"], respuesta: "B) Década de 1990" },
+            { pregunta: "Pregunta 3: ¿En qué evento fue anunciado públicamente C# en julio de 2000?", opciones: ["A) Microsoft Build", "B) Consumer Electronics Show (CES)", "C) Professional Developers Conference (PDC)", "D) Worldwide Developers Conference (WWDC)"], respuesta: "C) Professional Developers Conference (PDC)" },
+            { pregunta: "Pregunta 4: ¿Qué modelo de objetos utiliza C#, similar al de Java, según la información proporcionada?", opciones: ["A) Modelo de objetos de Python", "B) Modelo de objetos de Ruby", "C) Modelo de objetos de .NET", "D) Modelo de objetos de JavaScript"], respuesta: "C) Modelo de objetos de .NET" },
+            { pregunta: "Pregunta 5: ¿Cuál de las siguientes opciones NO es un caso de uso destacado de C# según la información proporcionada?", opciones: ["A) Desarrollo de videojuegos con Unity", "B) Aplicaciones para dispositivos móviles con Xamarin", "C) Desarrollo de software embebido con .NET Nanoframework", "D) Desarrollo de aplicaciones web con PHP"], respuesta: "D) Desarrollo de aplicaciones web con PHP" },
+            { pregunta: "Pregunta 6: ¿Qué evento fue mencionado como el lugar donde C# fue anunciado públicamente por primera vez?", opciones: ["A) Google I/O", "B) CES (Consumer Electronics Show)", "C) PDC (Professional Developers Conference)", "D) E3 (Electronic Entertainment Expo)"], respuesta: "C) PDC (Professional Developers Conference)" },
+            { pregunta: "Pregunta 7: ¿Cuál de los siguientes lenguajes de programación fue anteriormente trabajado por Anders Hejlsberg antes de su participación en el desarrollo de C#?", opciones: ["A) Java", "B) Turbo Pascal", "C) Python", "D) Ruby"], respuesta: "B) Turbo Pascal" },
+            { pregunta: "Pregunta 8: ¿Cómo se declara una variable en C#?", opciones: ["A) int variableName = 10;", "B) variableName = 10;", "C) declare variableName = 10;", "D) 10;"], respuesta: "A) int variableName = 10;" },
+            { pregunta: "Pregunta 9: ¿Cuál es el programa utilizado comúnmente para desarrollar en C#?", opciones: ["A) Eclipse", "B) Visual Studio Code", "C) NetBeans", "D) Visual Studio Community"], respuesta: "D) Visual Studio Community" },
+            { pregunta: "Pregunta 10: ¿Cómo se suele imprimir 'Hola, Mundo' en un programa de C#?", opciones: ["A) console.log('Hola, Mundo');", "B) System.print('Hola, Mundo');", "C) echo 'Hola, Mundo';", "D) Console.WriteLine('Hola, Mundo');"], respuesta: "D) Console.WriteLine('Hola, Mundo');" },
+             { pregunta: "Pregunta 11: ¿Cómo se declara una variable en C#?", opciones: ["A) var = 5", "B) int numero = 5", "C) sistem.out.print(5)", "D) Console.WriteLine(5);"], respuesta: "B) int numero = 5" },
+        { pregunta: "Pregunta 12: ¿Qué otros tipos de variables se pueden declarar?", opciones: ["A) string", "B) double", "C) int", "D) Todas las aneriores"], respuesta: "D) Todas las aneriores" }
+        ];
+
+        // Variables
+        var preguntaActual = 0;
+        var puntaje = 0;
+        var respuestasUsuario = [];
+
+        // Función para mostrar la pregunta actual
+        function mostrarPregunta() {
+            var preguntaElemento = document.getElementById('pregunta');
+            var opcionesElemento = document.getElementById('form-respuestas');
+
+            preguntaElemento.textContent = preguntas[preguntaActual].pregunta;
+
+            // Limpiar opciones anteriores
+            opcionesElemento.innerHTML = "";
+
+            // Agregar opciones de respuesta
+            preguntas[preguntaActual].opciones.forEach(function (opcion, index) {
+                var input = document.createElement('input');
+                input.type = 'radio';
+                input.name = 'opcion';
+                input.value = opcion;
+                input.id = 'opcion' + index;
+
+                // Si la opción está guardada por el usuario, seleccionarla
+                if (respuestasUsuario[preguntaActual] === opcion) {
+                    input.checked = true;
+                }
+
+                var label = document.createElement('label');
+                label.textContent = opcion;
+                label.setAttribute('for', 'opcion' + index);
+
+                opcionesElemento.appendChild(input);
+                opcionesElemento.appendChild(label);
+                opcionesElemento.appendChild(document.createElement('br'));
+            });
+        }
+
+        function verificarRespuesta() {
+            var opciones = document.getElementsByName('opcion');
+            var respuestaUsuario;
+
+            opciones.forEach(function (opcion) {
+                if (opcion.checked) {
+                    respuestaUsuario = opcion.value;
+                }
+            });
+
+            // Guardar la respuesta seleccionada por el usuario
+            respuestasUsuario[preguntaActual] = respuestaUsuario;
+
+            if (respuestaUsuario === preguntas[preguntaActual].respuesta) {
+                puntaje++;
+            }
+
+            // Verificar si hay más preguntas antes de incrementar preguntaActual
+            if (preguntaActual < preguntas.length - 1) {
+                // Pasar a la siguiente pregunta
+                preguntaActual++;
+                mostrarPregunta();
+            } else {
+                // Mostrar puntaje final
+                mostrarPuntuacion();
+            }
+        }
+
+
+        // Función para mostrar respuestas correctas
+        function mostrarRespuestas() {
+            var respuestasCorrectas = document.getElementById('lista-respuestas');
+            respuestasCorrectas.innerHTML = "";
+
+            preguntas.forEach(function (pregunta) {
+                var listItem = document.createElement('li');
+                listItem.innerHTML = `<strong>${pregunta.pregunta}:</strong> ${pregunta.respuesta}`;
+                respuestasCorrectas.appendChild(listItem);
+            });
+
+            document.getElementById('respuestas-correctas').style.display = 'block';
+        }
+
+        // Función para ocultar respuestas correctas
+        function ocultarRespuestas() {
+            document.getElementById('respuestas-correctas').style.display = 'none';
+        }
+
+        // Función para mostrar la puntuación final
+        function mostrarPuntuacion() {
+            var puntuacionElemento = document.getElementById('puntuacion');
+            var puntajeFinalElemento = document.getElementById('puntaje-final');
+
+            puntuacionElemento.style.display = 'block';
+            puntajeFinalElemento.textContent = puntaje;
+        }
+
+        // Función para ir a la pregunta anterior
+        function anteriorPregunta() {
+            // Regresar a la pregunta anterior si no estamos en la primera pregunta
+            if (preguntaActual > 0) {
+                preguntaActual--;
+                mostrarPregunta();
+            }
+        }
+
+        // Función para reiniciar el juego
+        function reiniciarJuego() {
+            preguntaActual = 0;
+            puntaje = 0;
+            respuestasUsuario = [];
+            document.getElementById('puntuacion').style.display = 'none';
+            document.getElementById('respuestas-correctas').style.display = 'none';
+            mostrarPregunta();
+        }
+
+        // Inicializar el juego
+        mostrarPregunta();
+    </script>
+
+</body>
+
+</html>
